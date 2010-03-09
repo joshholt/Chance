@@ -66,13 +66,9 @@ argparser = OptionParser.new {|opts|
 }
 
 argparser.parse!
-if ARGV.length == 0
-  puts "Error: No theme name specified. Example theme name: ace.light"
-  exit
-else
+if ARGV.length > 0
   config[:theme_name] = ARGV[0]
 end
-
 
 require 'find'
 images = {}
