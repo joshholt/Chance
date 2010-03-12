@@ -316,6 +316,7 @@ class Slicer
         
         row_height = [row_height, right[:height]].max
         row_space -= right[:width]
+        row_space = 0 if right[:clear]
       end
       
       # Find first (largest) image that will fit
