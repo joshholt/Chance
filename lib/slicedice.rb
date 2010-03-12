@@ -249,7 +249,7 @@ class Slicer
       i[:anchor] == :left
     }
     anchor_right_images = images.select {|i|
-      i[:anchor] == :right #or i[:clear]
+      i[:anchor] == :right #or i[:clear] this was causing duplication if a left anchored image was also cleared :)
     }
     
     max = 0
