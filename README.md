@@ -5,9 +5,9 @@ It only requires two special tags in your css to work.
 
 Contributions
 =============
-Alex Iskander  (http://create.tpsitulsa.com/blog/)   -- All credit for the initial idea
-Joshua Holt    (http://blog.thesempiternalholts.com) -- Modifications and Additions
-Colin Campbell (-----------------------------------) -- Modifications and Additions
+* Alex Iskander  (http://create.tpsitulsa.com/blog/)   -- All credit for the initial idea
+* Joshua Holt    (http://blog.thesempiternalholts.com) -- Modifications and Additions
+* Colin Campbell (-----------------------------------) -- Modifications and Additions
 
 Build Tools
 ===========
