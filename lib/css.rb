@@ -119,12 +119,12 @@ class CSSParser
         result = (@config[:url_template] % [image[:sprite_path]])
         result += " #{image[:repeat]}"
         if image[:anchor] == :none
-          result += image[:sprite_x] == 0 ? " #{image[:spite_x]}" : " -#{image[:sprite_x]}px"
+          result += image[:sprite_x] == 0 ? " #{image[:sprite_x]}" : " -#{image[:sprite_x]}px"
         else
           result += (image[:anchor] == :right ? " right" : " left")
         end
         
-        result += image[:sprite_y] == 0 ? " #{image[:spite_y]}" : " -#{image[:sprite_y]}px"
+        result += image[:sprite_y] == 0 ? " #{image[:sprite_y]}" : " -#{image[:sprite_y]}px"
       else
         puts "Did not find image with key: ", key
       end
