@@ -249,7 +249,7 @@ class Slicer
       i[:anchor] == :left
     }
     anchor_right_images = images.select {|i|
-      i[:anchor] == :right or i[:clear]
+      i[:anchor] == :right #or i[:clear]
     }
     
     max = 0
