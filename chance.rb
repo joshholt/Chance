@@ -24,6 +24,7 @@ require 'slicedice'
 
 require 'optparse'
 require 'pp'
+require 'FileUtils'
 
 config = {}
 argparser = OptionParser.new {|opts|
@@ -73,6 +74,7 @@ end
 
 require 'find'
 images = {}
+static_images = {}
 parsers = []
 Find.find(config[:input]) do |f|
   if f =~ /^\.\/(resources)|\/\./
@@ -83,8 +85,25 @@ Find.find(config[:input]) do |f|
     parsers << parser
     parser.parse
     images.merge! parser.images
+    static_images.merge! parser.static_images
   end
 end
+
+#---------------------------------------------------------------------------
+# TODO: ?
+#   I should probably make this a boolean option and wrap this in an if
+#   statement based on that option.
+#---------------------------------------------------------------------------
+# Copy all non-sprited images to respective dirs.
+static_images.values.each do |hsh|
+  src_path = hsh[:path]
+  location = /((\/images\/.*)(\/.*(\.png|\.jpg|\.gif)))/.match(src_path)[2]
+  new_loc = "#{config[:output].sub(/\/$/,'')}#{location}"
+  FileUtils.mkdir_p(new_loc) if !File.exist?(new_loc)
+  FileUtils.cp("#{src_path}", new_loc) if File.exist?(src_path)
+end
+# END Non-sprited image copy 
+
 
 slicer = Slicer.new(config)
 slicer.images = images

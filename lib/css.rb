@@ -1,7 +1,7 @@
 require 'set'
 
 class CSSParser
-  attr_accessor :images, :contents
+  attr_accessor :images, :contents, :static_images
   def initialize(directory, file, config)
     @directory = directory
     @file = file
@@ -11,6 +11,7 @@ class CSSParser
     end
     @config = config
     @images = {  }
+    @static_images = { }
   end
   
   def parse
@@ -20,8 +21,23 @@ class CSSParser
     file.each {|line| contents += line}
     @contents = contents
     
+    self.parse_static_images
     self.parse_rules
     self.parse_sprites
+  end
+  
+  def parse_static_images
+    contents = @contents
+    static_image_matcher = /static_url\((.*)\)/
+    contents.each do |line|
+      match = static_image_matcher.match(line)
+      if match
+        image_name = match[1].gsub("'","")
+        image_details = { :path => File.expand_path("#{@directory}/#{image_name}"), :image => image_name }
+        image_key = image_details[:path]
+        @static_images[image_key] = image_details 
+      end
+    end
   end
   
   def parse_rules
