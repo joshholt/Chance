@@ -95,12 +95,14 @@ end
 #   statement based on that option.
 #---------------------------------------------------------------------------
 # Copy all non-sprited images to respective dirs.
-static_images.values.each do |hsh|
-  src_path = hsh[:path]
-  location = /((\/images\/.*)(\/.*(\.png|\.jpg|\.gif)))/.match(src_path)[2]
-  new_loc = "#{config[:output].sub(/\/$/,'')}#{location}"
-  FileUtils.mkdir_p(new_loc) if !File.exist?(new_loc)
-  FileUtils.cp("#{src_path}", new_loc) if File.exist?(src_path)
+if static_images.length != 0
+  static_images.values.each do |hsh|
+    src_path = hsh[:path]
+    location = /((\/images\/.*)(\/.*(\.png|\.jpg|\.gif)))/.match(src_path)[2]
+    new_loc = "#{config[:output].sub(/\/$/,'')}#{location}"
+    FileUtils.mkdir_p(new_loc) if !File.exist?(new_loc)
+    FileUtils.cp("#{src_path}", new_loc) if File.exist?(src_path)
+  end
 end
 # END Non-sprited image copy 
 
