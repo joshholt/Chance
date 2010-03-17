@@ -21,7 +21,7 @@ class CSSParser
     file.each {|line| contents += line}
     @contents = contents
     
-    self.parse_static_images
+    # self.parse_static_images
     self.parse_rules
     self.parse_sprites
   end
@@ -51,6 +51,36 @@ class CSSParser
     contents.gsub!(view_rule) do |match|
       #".sc-view." + $1 + "." + theme_name # If SproutCore changes some
       ".sc-theme .sc-view" + @theme + "." + $1
+    end
+    
+    boxshadow_rule = /\-sc\-box\-shadow:\s*([^;]*)/
+    contents.gsub!(boxshadow_rule) do |match|
+      "-moz-box-shadow: " + $1 + "; -webkit-box-shadow: " + $1 + "; box-shadow: " + $1
+    end
+    
+    borderradius_rule = /\-sc\-border\-radius:\s*([^;]*)/
+    contents.gsub!(borderradius_rule) do |match|
+      "-moz-border-radius: " + $1 + "; -webkit-border-radius: " + $1 + "; border-radius: " + $1
+    end
+    
+    borderradius_topleft_rule = /\-sc\-border\-top\-left\-radius:\s*([^;]*)/
+    contents.gsub!(borderradius_topleft_rule) do |match|
+      "-moz-border-radius-topleft: " + $1 + "; -webkit-border-top-left-radius: " + $1 + "; border-top-left-radius: " + $1
+    end
+    
+    borderradius_topright_rule = /\-sc\-border\-top\-right\-radius:\s*([^;]*)/
+    contents.gsub!(borderradius_topright_rule) do |match|
+      "-moz-border-radius-topright: " + $1 + "; -webkit-border-top-right-radius: " + $1 + "; border-top-right-radius: " + $1
+    end
+    
+    borderradius_bottomleft_rule = /\-sc\-border\-bottom\-left\-radius:\s*([^;]*)/
+    contents.gsub!(borderradius_bottomleft_rule) do |match|
+      "-moz-border-radius-bottomleft: " + $1 + "; -webkit-border-bottom-left-radius: " + $1 + "; border-bottom-left-radius: " + $1
+    end
+    
+    borderradius_bottomright_rule = /\-sc\-border\-bottom\-right\-radius:\s*([^;]*)/
+    contents.gsub!(borderradius_bottomright_rule) do |match|
+      "-moz-border-radius-bottomright: " + $1 + "; -webkit-border-bottom-right-radius: " + $1 + "; border-bottom-right-radius: " + $1
     end
     
     @contents = contents

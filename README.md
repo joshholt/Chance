@@ -67,6 +67,30 @@ The syntax is:
 
 It is rather trivial to parse, yet also easy to read.
 
+
+Chance also provides declarations for easily providing cross-browser compatible CSS rules, including
+border-radius and box-shadow. Here is example input:
+	
+	.class {
+		-sc-box-shadow: 0 0 5px #000;
+		-sc-border-radius: 5px;
+		/*
+			Also supported:
+			-sc-border-top-left-radius
+			-sc-border-top-right-radius
+			-sc-border-bottom-left-radius
+			-sc-border-bottom-right-radius
+		*/
+	}
+
+Chance will then output the following, allowing for a single declaration to cover all browsers:
+	
+	.class {
+		-moz-box-shadow: 0 0 5px #000; -webkit-box-shadow: 0 0 5px #000; box-shadow: 0 0 5px #000;
+		-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+	}
+	
+
 Anchoring
 ---------
 Anchoring an image to the left or right side allows you to effectively create controls that have left,
