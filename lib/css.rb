@@ -21,7 +21,7 @@ class CSSParser
     file.each {|line| contents += line}
     @contents = contents
     
-    # self.parse_static_images
+    self.parse_static_images
     self.parse_rules
     self.parse_sprites
   end
@@ -29,7 +29,7 @@ class CSSParser
   def parse_static_images
     contents = @contents
     static_image_matcher = /static_url\((.*)\)/
-    contents.each do |line|
+    contents.each_line do |line|
       match = static_image_matcher.match(line)
       if match
         image_name = match[1].gsub("'","")
