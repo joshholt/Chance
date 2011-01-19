@@ -25,6 +25,7 @@ require 'slicedice'
 require 'optparse'
 require 'pp'
 require 'FileUtils'
+require 'rational'
 
 config = {}
 argparser = OptionParser.new {|opts|
