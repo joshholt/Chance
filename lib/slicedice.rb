@@ -127,12 +127,17 @@ class Slicer
     FileUtils.mkdir_p @output_dir + "images/"
     
     # Write static
+    input_path = @config[:input]
     nonsprites.each {|nonsprite|
-      i += 1
-      filename = i.to_s + ".png"
-      nonsprite[:sprite_path] = "images/" + filename
+      base_path = nonsprite[:path].gsub(@config[:input]+'/images/','')
+      paths = base_path.split('/')
+      filename = paths.pop
+      
+      file_path = ['images',paths,filename].join('/')
+      nonsprite[:sprite_path] = file_path
+      FileUtils.mkdir_p [@output_dir,'images',paths].join('/')
       new_image_hash[nonsprite[:key]] = nonsprite
-      nonsprite[:image].write(@output_dir + "images/" + filename)
+      nonsprite[:image].write(@output_dir + file_path)
     }
     
     # Write plan
